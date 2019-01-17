@@ -175,6 +175,44 @@ void displayMiddleNode(){
 	}
 }
 
+void insertNodeAt(int index){
+	if((index-displayLen())>1){
+		printf("Not possible to insert node at the %d in the list....!!!!!!!!!!!!!",index);	
+		return;
+		
+	}
+	struct node * current = (struct node*)malloc(sizeof(struct node));
+	current->data = 53;
+	current->next = NULL;
+	if(index == 1){
+		if(head == NULL){
+			head = current;
+		}
+		else{
+			struct node* temp;
+			temp = NULL;
+			temp = head;
+			head = current;
+			current->next = temp;
+		}
+	}
+	else{
+		struct node* temp = head;
+		int count = 0;
+		while(temp!=NULL){
+			count = count + 1;
+			if((count+1) == index){
+				struct node* temp1 = temp->next;
+				temp->next = current;
+				current->next = temp1;
+				return;
+			}
+			temp = temp->next;
+		}
+		return;
+	}
+}
+
 //Only 1 node present in the list, delete node 1 and displayData
 void test1(){
 	insertData();
@@ -215,8 +253,20 @@ void test4(){
 	insertData();
 	insertData();
 	insertData();
+	insertData();
+	insertData();
 	displayData();
 	displayMiddleNode();
+	exit(0);
+}
+
+void test5(){
+
+	insertData();
+	insertData();
+	insertData();
+	insertNodeAt(2);
+	displayData();
 	exit(0);
 }
 
@@ -233,7 +283,7 @@ int main(){
 	//test1();
 	//test2();
 	//test3();
-	test4();
-	
+	//test4();
+	test5();	
 	return ;
 }
